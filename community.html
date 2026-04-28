@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Connect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #FF69B4;
+        }
+        header a {
+            color: #823554;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            font-size: 1.8rem;
+            color: #FF69B4;
+            margin-bottom: 15px;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        form input, form select, form button {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        form button {
+            background-color: #FF69B4;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #FF69B4;
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+
+        .results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .profile-card {
+            background: #f4f4f4;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-card h4 {
+            color: #FF69B4;
+            margin-bottom: 5px;
+        }
+
+        .profile-card p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="opportunities.html">← Back to opportunities</a>
+            <h1>Community Connect</h1>
+            <p>Explore sample interest groups and find ideas for building local connections.</p>
+        </header>
+
+        <section class="intro">
+            <p>These fictional examples demonstrate how community discovery could work. Vistara does not have live member profiles or contact matching yet.</p>
+        </section>
+
+        <section class="form-section">
+            <h2>Find Your Tribe</h2>
+            <form id="filter-form">
+                <input type="search" id="name" placeholder="Search a name or interest" aria-label="Search a sample profile">
+                <select id="interest">
+                    <option value="">Select Interest</option>
+                    <option value="technology">Technology</option>
+                    <option value="art">Art</option>
+                    <option value="fitness">Fitness</option>
+                    <option value="music">Music</option>
+                    <option value="business">Business</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <section class="results" id="results">
+            <h3>Sample interest groups</h3>
+            <p>Choose an interest or search to explore fictional sample profiles. No personal contact details are displayed.</p>
+        </section>
+    </div>
+
+    <script>
+        const form = document.getElementById('filter-form');
+        const resultsSection = document.getElementById('results');
+
+        const profiles = [
+            { name: 'Sample member 1', interest: 'technology', description: 'Interested in practical technology and digital skills.' },
+            { name: 'Sample member 2', interest: 'art', description: 'Enjoys painting and creative projects.' },
+            { name: 'Sample member 3', interest: 'fitness', description: 'Interested in movement and wellbeing.' },
+            { name: 'Sample member 4', interest: 'music', description: 'Enjoys music and learning new instruments.' },
+            { name: 'Sample member 5', interest: 'business', description: 'Exploring local business ideas.' },
+        ];
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const interest = document.getElementById('interest').value;
+            const query = document.getElementById('name').value.trim().toLocaleLowerCase();
+            resultsSection.replaceChildren();
+            const heading = document.createElement('h3');
+            heading.textContent = 'Sample interest groups';
+            resultsSection.appendChild(heading);
+
+            const filteredProfiles = profiles.filter(profile =>
+                (!interest || profile.interest === interest) &&
+                (!query || `${profile.name} ${profile.interest} ${profile.description}`.toLocaleLowerCase().includes(query))
+            );
+
+            if (filteredProfiles.length > 0) {
+                filteredProfiles.forEach(profile => {
+                    const card = document.createElement('div');
+                    card.classList.add('profile-card');
+                    const title = document.createElement('h4');
+                    title.textContent = profile.name;
+                    const description = document.createElement('p');
+                    description.textContent = profile.description;
+                    const details = document.createElement('p');
+                    details.textContent = `Sample interest group: ${profile.interest}`;
+                    card.append(title, description, details);
+                    resultsSection.appendChild(card);
+                });
+            } else {
+                const emptyMessage = document.createElement('p');
+                emptyMessage.textContent = 'No sample profiles match that search.';
+                resultsSection.appendChild(emptyMessage);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vistara | Opportunities</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            color-scheme: light;
+            --ink: #29233a;
+            --muted: #777487;
+            --plum: #713e69;
+            --pink: #f5e6f0;
+            --paper: #fffdfb;
+            --line: #eee8ed;
+            --green: #2c765a;
+        }
+
+        body {
+            background: #faf8f7;
+            color: var(--ink);
+            font-family: "DM Sans", sans-serif;
+            line-height: 1.6;
+        }
+
+        button, input, textarea, select {
+            font: inherit;
+        }
+
+        header {
+            background: var(--paper);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .topbar {
+            align-items: center;
+            display: flex;
+            gap: 24px;
+            justify-content: space-between;
+            margin: auto;
+            max-width: 1160px;
+            min-height: 72px;
+            padding: 12px 24px;
+        }
+
+        .brand {
+            color: var(--plum);
+            font-family: "Playfair Display", serif;
+            font-size: 1.55rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        header nav ul {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+        }
+
+        header nav ul li a {
+            color: var(--muted);
+            font-size: .92rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        header nav ul li a:hover, header nav ul li a:focus-visible {
+            color: var(--plum);
+        }
+
+        .account {
+            align-items: center;
+            color: var(--muted);
+            display: flex;
+            font-size: .85rem;
+            gap: 12px;
+        }
+
+        .account a {
+            color: var(--plum);
+            font-weight: 700;
+        }
+
+        .button {
+            align-items: center;
+            background: var(--plum);
+            border: 0;
+            border-radius: 9px;
+            color: white;
+            cursor: pointer;
+            display: inline-flex;
+            font-weight: 700;
+            justify-content: center;
+            min-height: 42px;
+            padding: 9px 16px;
+            text-decoration: none;
+            transition: background .18s ease, transform .18s ease;
+        }
+
+        .button:hover:not(:disabled) {
+            background: #58304f;
+            transform: translateY(-1px);
+        }
+
+        .button:disabled {
+            cursor: not-allowed;
+            opacity: .58;
+        }
+
+        main {
+            margin: auto;
+            max-width: 1160px;
+            padding: 42px 24px 64px;
+        }
+
+        .welcome {
+            align-items: flex-end;
+            background: linear-gradient(112deg, #f3e5ef 0%, #f8eee5 100%);
+            border-radius: 20px;
+            display: flex;
+            gap: 24px;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            overflow: hidden;
+            padding: 35px 38px;
+        }
+
+        .eyebrow {
+            color: var(--plum);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .13em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .welcome h1, .section-heading h2 {
+            font-family: "Playfair Display", serif;
+        }
+
+        .welcome h1 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            letter-spacing: -.03em;
+            line-height: 1.15;
+            margin-bottom: 9px;
+        }
+
+        .welcome p:last-child {
+            color: #62596b;
+            max-width: 570px;
+        }
+
+        .live-badge {
+            align-items: center;
+            background: rgba(255,255,255,.7);
+            border: 1px solid rgba(113,62,105,.14);
+            border-radius: 999px;
+            color: var(--plum);
+            display: inline-flex;
+            flex: 0 0 auto;
+            font-size: .8rem;
+            font-weight: 700;
+            gap: 9px;
+            padding: 9px 13px;
+        }
+
+        .live-dot {
+            background: #49a878;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(73,168,120,.13);
+            height: 8px;
+            width: 8px;
+        }
+
+        .stats {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(3, 1fr);
+            margin-bottom: 32px;
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            padding: 17px 20px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.35rem;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: .83rem;
+        }
+
+        .section-heading {
+            align-items: flex-end;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .section-heading h2 {
+            font-size: 1.7rem;
+            letter-spacing: -.02em;
+        }
+
+        .section-heading p, .updated {
+            color: var(--muted);
+            font-size: .85rem;
+        }
+
+        .updated { margin-top: 2px; }
+
+        .toolbar {
+            align-items: center;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 17px;
+            padding: 13px;
+        }
+
+        .search-box {
+            flex: 1 1 260px;
+            position: relative;
+        }
+
+        .search-box input, .toolbar select {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            color: var(--ink);
+            min-height: 43px;
+            padding: 9px 12px;
+            width: 100%;
+        }
+
+        .search-box input { padding-left: 39px; }
+        .search-icon { color: var(--muted); left: 13px; position: absolute; top: 9px; }
+        .toolbar select { flex: 0 1 180px; }
+
+        .toggle-button, .icon-button {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            color: var(--ink);
+            cursor: pointer;
+            font-weight: 600;
+            min-height: 42px;
+            padding: 8px 13px;
+        }
+
+        .toggle-button[aria-pressed="true"] { background: var(--pink); border-color: #d7b6ce; color: var(--plum); }
+        .icon-button { align-items: center; display: inline-flex; gap: 7px; justify-content: center; }
+
+        .job-listings {
+            display: grid;
+            gap: 13px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .job-item {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 20px;
+            transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+        }
+
+        .job-item:hover { border-color: #d9c4d4; box-shadow: 0 10px 28px rgba(53,34,52,.07); transform: translateY(-2px); }
+        .job-topline { align-items: flex-start; display: flex; justify-content: space-between; }
+        .job-item h3 { font-size: 1.08rem; margin-bottom: 2px; }
+        .company { color: var(--plum); font-size: .9rem; font-weight: 600; }
+        .job-description { color: #5e5a67; font-size: .9rem; margin: 13px 0; }
+        .job-meta { color: var(--muted); display: flex; flex-wrap: wrap; font-size: .84rem; gap: 8px 16px; }
+        .job-skills { color: #554f60; font-size: .84rem; margin-top: 10px; }
+        .job-actions { align-items: center; border-top: 1px solid #f1edf0; display: flex; gap: 9px; justify-content: space-between; margin-top: 16px; padding-top: 14px; }
+        .job-actions .button { min-height: 38px; padding: 7px 13px; }
+        .save-button { color: var(--plum); }
+        .job-badge { background: #f6f1f5; border-radius: 999px; color: var(--plum); font-size: .73rem; font-weight: 700; padding: 4px 9px; }
+
+        .notice { border-radius: 10px; margin: 0 0 14px; padding: 11px 14px; }
+        .notice[hidden] { display: none; }
+        .notice.error { background: #fff0ef; color: #9c342f; }
+        .notice:not(.error) { background: #eef8f1; color: #286344; }
+        .empty-state { background: white; border: 1px dashed #d9cbd6; border-radius: 14px; color: var(--muted); grid-column: 1 / -1; padding: 36px 20px; text-align: center; }
+        .empty-state strong { color: var(--ink); display: block; font-size: 1.05rem; margin-bottom: 5px; }
+
+        .below-grid { display: grid; gap: 18px; grid-template-columns: 1.2fr .8fr; margin-top: 40px; }
+        .panel { background: white; border: 1px solid var(--line); border-radius: 15px; padding: 22px; }
+        .panel h2 { font-family: "Playfair Display", serif; font-size: 1.35rem; margin-bottom: 6px; }
+        .panel-intro { color: var(--muted); font-size: .88rem; margin-bottom: 17px; }
+        #job-post-form { display: grid; gap: 12px 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        #job-post-form label { color: #514a58; display: block; font-size: .82rem; font-weight: 700; margin-bottom: 5px; }
+        #job-post-form input, #job-post-form textarea { border: 1px solid var(--line); border-radius: 8px; padding: 10px; width: 100%; }
+        #job-post-form textarea { min-height: 82px; resize: vertical; }
+        #job-post-form .wide, #job-post-form button { grid-column: 1 / -1; }
+        .resource-list { list-style: none; }
+        .resource-list li + li { border-top: 1px solid var(--line); }
+        .resource-list a { color: var(--plum); display: block; font-size: .9rem; padding: 11px 0; text-decoration: none; }
+        .resource-list a:hover { text-decoration: underline; }
+        .testimonial { background: #f8f2f6; border-radius: 10px; color: #514a58; font-size: .9rem; margin-top: 12px; padding: 14px; }
+        footer { color: var(--muted); font-size: .82rem; padding: 0 24px 26px; text-align: center; }
+
+        @media (max-width: 760px) {
+            .topbar { flex-wrap: wrap; gap: 10px; }
+            .topbar nav { order: 3; overflow-x: auto; width: 100%; }
+            header nav ul { gap: 17px; min-width: max-content; }
+            main { padding: 26px 16px 45px; }
+            .welcome { align-items: flex-start; flex-direction: column; padding: 26px 23px; }
+            .stats { gap: 8px; }
+            .stat { padding: 13px; }
+            .job-listings, .below-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 460px) {
+            .stats { grid-template-columns: 1fr; }
+            .section-heading { align-items: flex-start; flex-direction: column; gap: 5px; }
+            .toolbar select { flex: 1 1 130px; }
+            #job-post-form { grid-template-columns: 1fr; }
+            #job-post-form .wide, #job-post-form button { grid-column: auto; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="topbar">
+            <a class="brand" href="opportunities.html">Vistara</a>
+            <nav aria-label="Main navigation">
+                <ul>
+                    <li><a href="#jobs">Find work</a></li>
+                    <li><a href="#employer">Post an opportunity</a></li>
+                    <li><a href="skilld.html">Learn skills</a></li>
+                </ul>
+            </nav>
+            <div class="account">
+                <span id="account-status" aria-live="polite">Checking account…</span>
+                <a id="login-link" href="login.html">Sign in</a>
+                <button class="toggle-button" id="logout-button" type="button" hidden>Log out</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="welcome" aria-labelledby="page-title">
+            <div>
+                <p class="eyebrow">A little step toward your next big thing</p>
+                <h1 id="page-title">Work that works for you.</h1>
+                <p>Discover local opportunities, find a role that fits your skills, and connect with people who value what you do.</p>
+            </div>
+            <span class="live-badge"><span class="live-dot" aria-hidden="true"></span> Community job board</span>
+        </section>
+
+        <section class="stats" aria-label="Opportunity board at a glance">
+            <div class="stat"><strong id="total-jobs">—</strong><span>opportunities listed</span></div>
+            <div class="stat"><strong id="visible-jobs">—</strong><span>matching your search</span></div>
+            <div class="stat"><strong id="saved-count">0</strong><span>opportunities saved</span></div>
+        </section>
+
+        <section id="jobs" aria-labelledby="jobs-title">
+            <div class="section-heading">
+                <div>
+                    <h2 id="jobs-title">Explore opportunities</h2>
+                    <p>Find a role nearby or try a new skill.</p>
+                    <p class="updated" id="last-updated">Connecting to the job board…</p>
+                </div>
+                <button class="icon-button" id="refresh-jobs" type="button" aria-label="Refresh opportunities">↻ <span>Refresh</span></button>
+            </div>
+            <p class="notice" id="job-message" role="status" aria-live="polite" hidden></p>
+            <div class="toolbar" role="search">
+                <label class="search-box">
+                    <span class="search-icon" aria-hidden="true">⌕</span>
+                    <input id="job-search" type="search" aria-label="Search roles, companies, and skills" placeholder="Search role, company, or skill…" autocomplete="off">
+                </label>
+                <select id="location-filter" aria-label="Filter by location">
+                    <option value="">All locations</option>
+                </select>
+                <select id="sort-jobs" aria-label="Sort opportunities">
+                    <option value="newest">Recently added</option>
+                    <option value="title">Role: A to Z</option>
+                    <option value="location">Location: A to Z</option>
+                </select>
+                <button class="toggle-button" id="saved-filter" type="button" aria-pressed="false">♡ Saved</button>
+            </div>
+            <div class="job-listings" id="job-listings" aria-live="polite" aria-busy="true"></div>
+        </section>
+
+        <div class="below-grid">
+            <section class="panel" id="employer">
+                <h2>Share an opportunity</h2>
+                <p class="panel-intro">Help someone find their next step. Sign in to publish a job to the community board.</p>
+                <form id="job-post-form">
+                    <div><label for="job-title">Role title</label><input type="text" id="job-title" name="title" maxlength="500" placeholder="e.g. Tailor" required></div>
+                    <div><label for="job-company">Company or group</label><input type="text" id="job-company" name="company" maxlength="500" placeholder="Who is hiring?" required></div>
+                    <div><label for="job-location">Location</label><input type="text" id="job-location" name="location" maxlength="500" placeholder="Town or district" required></div>
+                    <div><label for="salary-range">Pay range</label><input type="text" id="salary-range" name="salary" maxlength="500" placeholder="e.g. ₹10,000/month" required></div>
+                    <div class="wide"><label for="job-description">What will the person do?</label><textarea id="job-description" name="description" maxlength="500" required></textarea></div>
+                    <div class="wide"><label for="skills-required">Skills or experience</label><input type="text" id="skills-required" name="skills" maxlength="500" required></div>
+                    <button class="button" type="submit">Publish opportunity</button>
+                </form>
+            </section>
+            <aside class="panel">
+                <h2>Grow as you go</h2>
+                <p class="panel-intro">Explore practical learning paths while you look for work.</p>
+                <ul class="resource-list">
+                    <li><a href="tailor.html">Learn tailoring and stitching →</a></li>
+                    <li><a href="art.html">Explore arts and crafts →</a></li>
+                    <li><a href="masscooking.html">Build large-scale cooking skills →</a></li>
+                    <li><a href="smallbusiness.html">Start a small business →</a></li>
+                </ul>
+                <div class="testimonial">“This platform helped me connect with a local tailor shop, and now I work full-time as a seamstress!”<br><strong>— Asha</strong></div>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <p>Vistara · Growing stronger, together</p>
+    </footer>
+    <script src="app.js" defer></script>
+</body>
+</html>

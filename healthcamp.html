@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vistara - Find Health Camps</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #FFF0F5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #FF69B4;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        header a {
+            color: white;
+            display: inline-block;
+            font-size: .9rem;
+            margin-bottom: 8px;
+            text-decoration: none;
+        }
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn {
+            display: inline-block;
+            background-color: #FF1493;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin: 10px 0;
+        }
+        .btn:hover {
+            background-color: #C71585;
+        }
+        .search-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .search-form select {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #FF69B4;
+            border-radius: 5px;
+        }
+        .health-camp {
+            border: 1px solid #FF69B4;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .health-camp h3 {
+            color: #FF1493;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="opportunities.html">← Back to opportunities</a>
+            <h1>Find Health Camps Near You</h1>
+        </header>
+
+        <div class="section">
+            <h2>Search Health Camps</h2>
+            <form class="search-form" id="camp-search">
+                <label for="state">State</label>
+                <select id="state" required>
+                    <option value="">Select State</option>
+                    <option>Kerala</option>
+                    <option>Karnataka</option>
+                    <option>Maharashtra</option>
+                </select>
+                <label for="district">District / city</label>
+                <select id="district" required disabled>
+                    <option value="">Select District</option>
+                </select>
+                <label for="camp-type">Health resource</label>
+                <select id="camp-type">
+                    <option value="">All resource types</option>
+                    <option>Women's Health</option>
+                    <option>General Health Check-up</option>
+                    <option>Gynecological Screening</option>
+                    <option>Reproductive Health</option>
+                </select>
+                <button type="submit" class="btn">Find Health Camps</button>
+            </form>
+        </div>
+
+        <div class="section">
+            <h2>Sample health resources</h2>
+            <p>These are illustrative listings for the prototype, not confirmed events or medical advice. Contact a local health provider to verify services and dates.</p>
+            <p id="camp-message" role="status" aria-live="polite"></p>
+            <div id="camp-list"></div>
+        </div>
+
+        <div class="section">
+            <h2>Need Help?</h2>
+            <p>This prototype does not provide a staffed health helpline. If you need care, please contact a trusted local health service or emergency provider.</p>
+            <a href="support2.html" class="btn">Browse support resources</a>
+        </div>
+    </div>
+
+    <script>
+        const stateDistricts = {
+            "Karnataka": ["Bangalore", "Mysore", "Hubli", "Mangalore"],
+            "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur"],
+            "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik"]
+        };
+
+        const stateSelect = document.getElementById('state');
+        const districtSelect = document.getElementById('district');
+
+        const campForm = document.getElementById('camp-search');
+        const campList = document.getElementById('camp-list');
+        const campMessage = document.getElementById('camp-message');
+        const sampleCamps = [
+            { title: "Women's wellness information session", state: "Kerala", district: "Kochi", type: "Women's Health", services: "General wellbeing information and local service referrals" },
+            { title: "Community health check-up (sample)", state: "Karnataka", district: "Bangalore", type: "General Health Check-up", services: "Example listing for a general screening resource" },
+            { title: "Reproductive health learning session", state: "Maharashtra", district: "Mumbai", type: "Reproductive Health", services: "Educational information and questions for a qualified provider" }
+        ];
+
+        stateSelect.addEventListener('change', () => {
+            districtSelect.disabled = true;
+            districtSelect.innerHTML = '<option value="">Select District</option>';
+            const selectedState = stateSelect.value;
+            const districts = stateDistricts[selectedState] || [];
+            districts.forEach(district => {
+                const option = document.createElement('option');
+                option.value = district;
+                option.textContent = district;
+                districtSelect.appendChild(option);
+            });
+            districtSelect.disabled = districts.length === 0;
+        });
+
+        campForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const state = stateSelect.value;
+            const district = districtSelect.value;
+            const type = document.getElementById('camp-type').value;
+            const matches = sampleCamps.filter(camp =>
+                camp.state === state &&
+                camp.district === district &&
+                (!type || camp.type === type)
+            );
+            campList.replaceChildren();
+            campMessage.textContent = "Showing illustrative prototype listings only. Dates, availability, and services are not confirmed.";
+            if (!matches.length) {
+                campList.textContent = "No sample listings match this location. Please check local health providers for current services.";
+                return;
+            }
+            matches.forEach(camp => {
+                const card = document.createElement('article');
+                card.className = 'health-camp';
+                const title = document.createElement('h3');
+                title.textContent = camp.title;
+                const location = document.createElement('p');
+                location.textContent = `Location: ${camp.district}, ${camp.state}`;
+                const services = document.createElement('p');
+                services.textContent = `Information: ${camp.services}`;
+                const date = document.createElement('p');
+                date.textContent = 'Date: Not scheduled (sample listing)';
+                card.append(title, location, services, date);
+                campList.append(card);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Development</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffe4e6, #f8d7da);
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #5e4a4f;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #b03e53;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            color: #a35a68;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        .skill-card {
+            background-color: #fff5f7;
+            border: 2px solid #f9c5ca;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            background-color: #ffd7db;
+        }
+
+        .skill-card h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #b03e53;
+            margin-bottom: 10px;
+        }
+
+        .skill-card p {
+            font-size: 16px;
+            color: #705d62;
+            margin-bottom: 15px;
+        }
+
+        .skill-card a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .skill-card button {
+            background-color: #b03e53;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .skill-card button:hover {
+            background-color: #e05a72;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>Skill Development Programs</h1>
+    <p class="description">
+        Empowering individuals through skill development programs like tailoring, art, pottery, mass cooking, and more. 
+        Learn, grow, and take a step toward independence.
+    </p>
+    <div class="skills-container">
+        <div class="skill-card">
+            <h2>Tailoring</h2>
+            <p>Learn the art of stitching and tailoring to create beautiful garments and earn a sustainable income.</p>
+            <button><a href="tailor.html">Learn More</a></button>
+        </div>
+        <div class="skill-card">
+            <h2>Art & Craft</h2>
+            <p>Explore your creativity through painting, sketching, and crafting unique handmade products.</p>
+            <button><a href="art.html">Learn More</a></button>
+        </div>
+        <div class="skill-card">
+            <h2>Pottery</h2>
+            <p>Master the skill of pottery making and create exquisite designs with clay.</p>
+            <button><a href="pottery.html">Learn More</a></button>
+        </div>
+        <div class="skill-card">
+            <h2>Mass Cooking</h2>
+            <p>Gain culinary skills to prepare meals at scale and explore catering opportunities.</p>
+            <button><a href="masscooking.html">Learn More</a></button>
+        </div>
+        <div class="skill-card">
+            <h2>Small Businesses</h2>
+            <p>Develop entrepreneurial skills and learn to manage small-scale businesses effectively.</p>
+            <button><a href="smallbusiness.html">Learn More</a></button>
+        </div>
+    </div>
+</body>
+</html>
